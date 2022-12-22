@@ -1,0 +1,136 @@
+pngquant (2.13.1-1) unstable; urgency=medium
+
+  * New upstream version
+  * Standards-Version: 4.5.1 (routine-update)
+  * debhelper-compat 13 (routine-update)
+  * Respect DEB_BUILD_OPTIONS in override_dh_auto_test target (routine-
+    update)
+  * Add salsa-ci file (routine-update)
+  * Rules-Requires-Root: no (routine-update)
+  * Trim trailing whitespace.
+  * Use secure URI in Homepage field.
+  * Set field Upstream-Name in debian/copyright.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+ -- Andreas Tille <tille@debian.org>  Wed, 02 Dec 2020 20:23:49 +0100
+
+pngquant (2.12.2-1) unstable; urgency=medium
+
+  * New upstream version
+    Closes: #894891
+  * Upstream moved source to Github
+  * cme fix dpkg-control
+  * debhelper 11
+  * Build-Depends: libimagequant-dev
+  * Build-Depends: liblcms2-dev
+  * Point Vcs fields to Salsa
+  * New upstream version
+  * Standards-Version: 4.2.1
+  * d/rules: enable cross building (thanks for the patch to Helmut Grohne
+    <helmut@subdivi.de>)
+    Closes: #902548, #857175
+
+ -- Andreas Tille <tille@debian.org>  Wed, 05 Dec 2018 15:59:46 +0100
+
+pngquant (2.5.0-2) unstable; urgency=medium
+
+  * Fix CVE-2016-5735 (Thanks for the patch to Emilio Pozuelo
+    Monfort <pochu@debian.org>)
+    Closes: 863469
+
+ -- Andreas Tille <tille@debian.org>  Thu, 01 Jun 2017 10:05:51 +0200
+
+pngquant (2.5.0-1) unstable; urgency=medium
+
+  * New upstream version
+  * Suppress dh_auto_test since there is no test provided
+
+ -- Andreas Tille <tille@debian.org>  Mon, 27 Jul 2015 09:46:16 +0200
+
+pngquant (2.3.0-1) unstable; urgency=medium
+
+  * New upstream version
+  * cme fix dpkg-control
+  * d/copyright: Fix some DEP5 names
+  * d/rules: cope with hand-written configure script
+
+ -- Andreas Tille <tille@debian.org>  Tue, 07 Oct 2014 09:19:38 +0200
+
+pngquant (2.1.0-1) unstable; urgency=low
+
+  [ Andreas Tille ]
+  * debian/copyright: Changed e-mail address of upstream as requested
+
+  [ Jackson Doak ]
+  * New upstream release. Closes: #736215
+  * debian/control: Bump standards-version to 3.9.5
+  * Use upstream's manpage instead of our own
+
+  [ Nelson A. de Oliveira ]
+  * Pass NDEBUG when building the binary (LP: #1306426)
+
+ -- Andreas Tille <tille@debian.org>  Fri, 11 Apr 2014 23:57:49 +0200
+
+pngquant (2.0.1-1) unstable; urgency=low
+
+  * New upstream version
+  * debian/watch: Adapt to new homepage
+  * debian/control:
+     - moved package to pkg-phototools team
+     - add myself as Uploader
+     - New homepage
+     - cme fix dpkg-control
+     - debhelper 9
+     - set Vcs fields to pkg-phototools
+  * debian/source/format: 3.0 (quilt)
+  * debian/rules: use dh instead of cdbs
+  * debian/copyright: DEP5
+
+ -- Andreas Tille <tille@debian.org>  Tue, 19 Nov 2013 12:16:49 +0100
+
+pngquant (1.0-4.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix FTBFS: fix format security (Closes: #643459)
+  * Fix FTBFS with libpng 1.5: explicit include zlib.h (Closes: #641891)
+
+ -- Simon Paillard <spaillard@debian.org>  Fri, 18 Nov 2011 00:04:47 +0100
+
+pngquant (1.0-4) unstable; urgency=low
+
+  * Fix watch file (Closes: #450009);
+  * Updated Standards-Version to 3.7.3 (no changes needed);
+  * Using new Homepage field;
+  * Updated debhelper compatibility level to 6.
+
+ -- Nelson A. de Oliveira <naoliv@debian.org>  Tue, 26 Feb 2008 09:50:21 -0300
+
+pngquant (1.0-3) unstable; urgency=medium
+
+  * Added explanation about ncolors on manpage (Closes: #388638);
+  * New maintainer address;
+  * Added tags on debian/control;
+  * Changed to debhelper compatibility level 5;
+  * Added a space before Homepage: on debian/control;
+  * Updated Standards-Version to 3.7.2 (no changes needed);
+  * Medium urgency since it includes documentation fix only.
+
+ -- Nelson A. de Oliveira <naoliv@debian.org>  Thu,  7 Dec 2006 00:53:28 -0200
+
+pngquant (1.0-2) unstable; urgency=low
+
+  * pngquant is not linked statically to libpng anymore;
+  * Updated Standards-Version to 3.6.2 (no changes needed);
+  * Using CDBS now;
+  * Added watch file;
+  * Included upstream changelog;
+  * Updated description.
+
+ -- Nelson A. de Oliveira <naoliv@gmail.com>  Wed, 19 Oct 2005 17:12:20 -0200
+
+pngquant (1.0-1) unstable; urgency=low
+
+  * Initial Release (Closes: #283960)
+
+ -- Nelson A. de Oliveira <naoliv@gmail.com>  Thu,  3 Mar 2005 22:29:03 -0300
