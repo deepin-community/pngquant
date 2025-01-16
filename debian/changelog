@@ -1,3 +1,22 @@
+pngquant (2.18.0-1) unstable; urgency=medium
+
+  * Fix clean target
+    Closes: #1045315
+  * d/watch: Restrict upstream version to 2.x since I have no capacity
+    to switch to Rust which needs extra not yet packaged dependencies
+  * New upstream version
+  * Standards-Version: 4.6.2 (routine-update)
+
+ -- Andreas Tille <tille@debian.org>  Fri, 26 Jan 2024 20:10:17 +0100
+
+pngquant (2.17.0-1) unstable; urgency=medium
+
+  * Fix watch file
+  * New upstream version
+  * Standards-Version: 4.6.1 (routine-update)
+
+ -- Andreas Tille <tille@debian.org>  Thu, 24 Nov 2022 17:18:59 +0100
+
 pngquant (2.13.1-1) unstable; urgency=medium
 
   * New upstream version
