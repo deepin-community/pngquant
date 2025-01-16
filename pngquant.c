@@ -40,10 +40,11 @@ use --force to overwrite. See man page for full list of options.\n";
 #include <math.h>
 
 #if defined(_WIN32) || defined(WIN32) || defined(__WIN32__)
-#  include <fcntl.h>    /* O_BINARY */
-#  include <io.h>   /* setmode() */
+#include <fcntl.h>    /* O_BINARY */
+#include <io.h>   /* setmode() */
+#include <locale.h> /* UTF-8 locale */
 #else
-#  include <unistd.h>
+#include <unistd.h>
 #endif
 
 #ifdef _OPENMP
@@ -57,7 +58,7 @@ use --force to overwrite. See man page for full list of options.\n";
 #include "libimagequant.h" /* if it fails here, run: git submodule update; ./configure; or add -Ilib to compiler flags */
 #include "pngquant_opts.h"
 
-char *PNGQUANT_VERSION = LIQ_VERSION_STRING " (July 2019)";
+char *PNGQUANT_VERSION = LIQ_VERSION_STRING " (January 2023)";
 
 static pngquant_error prepare_output_image(liq_result *result, liq_image *input_image, rwpng_color_transform tag, png8_image *output_image);
 static void set_palette(liq_result *result, png8_image *output_image);
@@ -231,6 +232,10 @@ int main(int argc, char *argv[])
         return SUCCESS;
     }
 
+#if defined(_WIN32) || defined(WIN32) || defined(__WIN32__)
+    setlocale(LC_ALL, ".65001"); // issue #376; set UTF-8 for Unicode filenames
+#endif
+
     liq_attr *liq = liq_attr_create();
 
     if (!liq) {
@@ -319,6 +324,10 @@ int main(int argc, char *argv[])
 // Don't use this. This is not a public API.
 pngquant_error pngquant_main_internal(struct pngquant_options *options, liq_attr *liq)
 {
+#if defined(_WIN32) || defined(WIN32) || defined(__WIN32__)
+    setlocale(LC_ALL, ".65001"); // issue #376; set UTF-8 for Unicode filenames
+#endif
+
     if (options->map_file) {
         png24_image tmp = {.width=0};
         if (SUCCESS != read_image(liq, options->map_file, false, &tmp, &options->fixed_palette_image, true, true, false)) {
@@ -336,16 +345,6 @@ pngquant_error pngquant_main_internal(struct pngquant_options *options, liq_attr
         }
         liq_result_destroy(tmp_quantize);
     }
-
-#ifdef _OPENMP
-    // if there's a lot of files, coarse parallelism can be used
-    if (options->num_files > 2*omp_get_max_threads()) {
-        omp_set_nested(0);
-        omp_set_dynamic(1);
-    } else {
-        omp_set_nested(1);
-    }
-#endif
 
     unsigned int error_count=0, skipped_count=0, file_count=0;
     pngquant_error latest_error=SUCCESS;
@@ -495,7 +494,7 @@ static pngquant_error pngquant_file_internal(const char *filename, const char *o
         if (options->skip_if_larger) {
             // this is very rough approximation, but generally avoid losing more quality than is gained in file size.
             // Quality is raised to 1.5, because even greater savings are needed to justify big quality loss.
-            // but >50% savings are considered always worthwile in order to allow low quality conversions to work at all
+            // but >50% savings are considered always worthwhile in order to allow low quality conversions to work at all
             const double quality = quality_percent/100.0;
             const double expected_reduced_size = pow(quality, 1.5);
             output_image.maximum_file_size = (input_image_rwpng.file_size-1) * (expected_reduced_size < 0.5 ? 0.5 : expected_reduced_size);
